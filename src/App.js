@@ -4,8 +4,9 @@ import React, { useState } from 'react';
 function App() {
   const [inputValue,setInputValue] = useState('');
   const [renders, setRenders] = useState([]);
-  const [count1, setCount1] = useState(0);
-  const [count2, setCount2] = useState(0);
+  const [availableTasks, setAvailableTasks] = useState(0);
+  const [completedTasks, setCompletedTasks] = useState(0);
+  const [doneTaskIndices, setDoneTaskIndices] = useState(new Set());
 
   function inputHandle(e) {
     const value = e.target.value;
@@ -15,15 +16,33 @@ function App() {
 
   function buttonHandle(e) {
     setRenders([...renders, inputValue]);
-    setCount1(count1 + 1);
+    setAvailableTasks(availableTasks + 1);
     setInputValue('');
     console.log('added');
   }
 
   function deleteHandle(index) {
     setRenders(renders.filter((text, i) => i !== index));
-    setCount2(count2 - 1);
-    setInputValue('');
+    if (doneTaskIndices.has(index)) {
+      setCompletedTasks(completedTasks - 1);
+      setDoneTaskIndices(prevSet => {
+        const newSet = new Set(prevSet);
+        newSet.delete(index);
+        return newSet;
+      });
+    } else {
+      setAvailableTasks(availableTasks - 1);
+    }
+  }
+
+  function doneHandle(index) {
+    setDoneTaskIndices(prevSet => {
+      const newSet = new Set(prevSet);
+      newSet.add(index);
+      return newSet;
+    });
+    setAvailableTasks(availableTasks - 1);
+    setCompletedTasks(completedTasks + 1);
   }
 
   return (
@@ -52,6 +71,9 @@ function App() {
             <tr key={index}>
               <td>{text}</td>
               <td><button 
+                      onClick={() => doneHandle(index)} 
+                      disabled={doneTaskIndices.has(index)}
+                    >Done</button> <button 
               onClick={() => deleteHandle(index)} >X</button></td>
             </tr>
               ))}
@@ -60,8 +82,8 @@ function App() {
         </div>
 
       <footer className='App-footer'>
-          <h3>Avaliable Task:{count1}</h3>
-          <h3>Task Done:{count1}</h3>
+          <h3>Avaliable Task: {availableTasks > 0 ? availableTasks : 'null'}</h3>
+          <h3>Task Done: {completedTasks}</h3>
       </footer>
     </div>
   );
