@@ -70,10 +70,10 @@ function App() {
               {renders.map((text, index) => (
             <tr key={index}>
               <td>{text}</td>
-              <td><button 
+              <td><button className='Done'
                       onClick={() => doneHandle(index)} 
                       disabled={doneTaskIndices.has(index)}
-                    >Done</button> <button 
+                    >Done</button> <button className='Red'
               onClick={() => deleteHandle(index)} >X</button></td>
             </tr>
               ))}
