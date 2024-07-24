@@ -56,16 +56,19 @@ function App() {
           <input type='text' 
             value={inputValue}
             onChange={(e) => inputHandle(e)}
-          placeholder='Enter what to do...' />
+          placeholder='Enter what to do...' required />
 
-          <button onClick={(e) =>buttonHandle(e)} >+</button>
+          <button 
+            disabled={!inputValue}
+            onClick={(e) =>buttonHandle(e)} >+</button>
         </div>
 
         <div className='render'>
+          <div className='tbl-container'>
           <table>
             <tr>
               <th>List</th>
-              <th>Clear</th>
+              <th>Action</th>
             </tr>
               {renders.map((text, index) => (
             <tr key={index}>
@@ -78,6 +81,7 @@ function App() {
             </tr>
               ))}
           </table>
+          </div>
           </div>
         </div>
 

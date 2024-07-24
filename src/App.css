@@ -8,9 +8,10 @@
   background-color: crimson;
   color: white;
   padding: 0 10px;
-  position: fixed;
+  /* position: fixed;
   top: 0;
-  left: 0;
+  left: 0; */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   height: 10vh;
   width: 100vw;
   z-index: 1;
@@ -26,15 +27,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 40vh;
+  height: 70px;
   gap: 15px;
 }
 
 .All-render{
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
+.input {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
 .input input{
   width: 50%;
   height: 40px;
@@ -63,18 +75,30 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 0vh;
 }
-
+.tbl-container{
+  width: 70%;
+  overflow-y: auto;
+  height: 375px;
+  overflow-x: auto;
+}
 table{
-  width: 50%;
-  border-top: 2px solid;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
 }
 table th, td{
   border: 2px;
   border-bottom: 2px solid;
-  text-align: center;
+  text-align: left;
   font-family: 'Signika', sans-serif;
+}
+th{
+  position: sticky;
+  background-color: whitesmoke;
+  height: 30px;
 }
 td button.Done{
   background-color: green;
